@@ -26,8 +26,10 @@ Gợi ý chia vai:
 
 | Người | Vai | Commit | Test đã thêm hoặc sửa |
 | --- | --- | --- | --- |
-| Nguyễn Hoàng Việt | Single Agent & ReAct | 76f2ec1 | test_single_agent_worker_cannot_call_write_tools, test_single_agent_prompt_injection_resistant, test_single_agent_order_already_refunded_cap, test_single_agent_trace_is_clean_and_valid |
-
+| Tống Thiên Bảo | Workflow + tích hợp | 9805936 | src/tests/test_workflow_safety.py |
+| Nguyễn Hoàng Việt | Single agent | 76f2ec1 | src/tests/test_single_agent_tv2.py |
+| Trần Đăng Khoa | Orchestrator + handoff | a929cea | src/tests/test_team_orchestrator.py |
+| Dương Quang Bảo | Kiểm thử chung + đánh giá | b113fa9 | src/tests/test_shapes_crash_tv4.py |
 ## Cá nhân
 
 Mỗi thành viên đồng thời tạo một báo cáo riêng trong `report/` theo dạng:

@@ -1,30 +1,29 @@
 # Decision record
 
-Điền sau dấu `:` trên cùng dòng, không xóa nhãn. Giảng viên và `python -m lab8.check_submission` (chạy trong `src/`) đọc các dòng này bằng máy. Không đổi tên hay dời file này khỏi `report/team/`.
-`Shape chọn` phải là đúng một trong: `workflow`, `single`, `orchestrator`, `swarm`. Đây là shape được chấm cổng hidden.
-
-- Shape chọn:
-- Commit hash:
-- Run id dẫn chứng:
-- Pass rate / pass^5 / seed min-max / variance:
-- Cost per success (mô phỏng, VND):
-- Crash safety:
-- Secret leak / approval bypass:
-
-Ví dụ một dòng đã điền: `- Shape chọn: workflow`, `- Crash safety: 20/20 (src/reports/crash.json)`.
+- Shape chọn: workflow
+- Commit hash: bce15a7
+- Run id dẫn chứng: R-workflow-C-001-s11; src/reports/benchmark.json
+- Pass rate / pass^5 / seed min-max / variance: 1.0 / 1.0 / 1.0–1.0 / 0.0 trên public
+- Cost per success (mô phỏng, VND): 27.857142857142858
+- Crash safety: 20/20 (src/reports/crash.json); test bổ sung kiểm crash/resume của cả ba shape
+- Secret leak / approval bypass: Không phát hiện trong các kiểm tra public và test an toàn đã chạy; chưa có số đếm hidden chính thức.
 
 ## Vì sao shape này
 
-Viết 1 đoạn. So cùng corpus và cùng seed, không so với một lần chạy lẻ.
+Trên cùng 14 claim và 5 seed, workflow, single và orchestrator đều đạt pass rate và pass^5 bằng 1.0. Workflow có cost/success thấp nhất: 27.857143 VND mô phỏng, so với single 39.291429 và orchestrator 47.447143. Nhóm chọn workflow vì quy trình có luật rõ, dữ liệu có cấu trúc và không cần thêm mức tự chủ để đạt kết quả public đã đo.
 
 ## Có đáng đổi lấy multi-agent không
 
-Nếu pass nhỉnh hơn mà cost và variance cao hơn, nhóm giữ hay đổi? Điều kiện nào làm quyết định đảo lại?
+Multi-agent chưa cải thiện độ đúng so với workflow trên public và có chi phí cao hơn. Nhóm sẽ xem xét đổi kiến trúc nếu dữ liệu mới cho thấy tác vụ điều tra hoặc xử lý mơ hồ vượt khả năng workflow, trong khi kiến trúc khác cải thiện kết quả đủ để bù chi phí và vẫn đạt safety.
 
 ## Trace và bằng chứng
 
-Trace của nhóm ghi những event nào? Field nào cố ý **không** ghi, và vì sao? Nếu trace nằm ngoài chỗ scanner quét được, đội security chứng minh thế nào là hệ thống không lộ secret?
+Workflow ghi các event claim, order_scope, quote, refund và decision tùy nhánh. Không ghi ticket, parent secret, raw headers, số điện thoại, địa chỉ, tên hàng hoặc ghi chú nội bộ. Kết quả dùng finish và được đối chiếu ledger. Không tạo debug dump ngoài thư mục trace.
+
+Bằng chứng: src/reports/benchmark.json, src/reports/crash.json và các test trong src/tests/.
 
 ## Giới hạn
 
-MockLLM không phải model sản xuất. Latency để `unavailable`. Không sửa JSON cho đủ 0.75.
+MockLLM không phải model sản xuất. Cost là mô phỏng; latency unavailable. Public chỉ có 14 claim, chưa chứng minh đạt ngưỡng hidden 40 claim × 5 seed. Steps là số event trong trace, không phải latency.
+
+Ablation bỏ draft của single giữ nguyên pass rate và pass^5, đồng thời giảm cost/success từ khoảng 39.29 xuống 38.36 VND mô phỏng. Grader không đánh giá chất lượng trả lời khách, nên chưa thể kết luận draft không có giá trị trong sản phẩm thật.
