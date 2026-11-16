@@ -8,11 +8,12 @@
 - URL repo, nhánh nộp, commit chốt: main
 
 ## Thành viên
-
-| STT | Họ tên | MSSV | Email | GitHub | Vai trò |
-| --: | ------ | ---- | ----- | ------ | ------- |
-|   1 |        |      |       |        |         |
-|   2 | Nguyễn Hoàng Việt | 03487 | hoangviet1824qsqn@gmail.com | HViettt | Single Agent & ReAct Loop |
+| Người | Vai | Commit | Test đã thêm hoặc sửa |
+| --- | --- | --- | --- |
+| Tống Thiên Bảo | Workflow + tích hợp | 9805936 | src/tests/test_workflow_safety.py |
+| Nguyễn Hoàng Việt | Single agent | 76f2ec1 | src/tests/test_single_agent_tv2.py |
+| Trần Đăng Khoa | Orchestrator + handoff | a929cea | src/tests/test_team_orchestrator.py |
+| Dương Quang Bảo | Kiểm thử chung + đánh giá | b113fa9 | src/tests/test_shapes_crash_tv4.py |
 
 Gợi ý chia vai:
 

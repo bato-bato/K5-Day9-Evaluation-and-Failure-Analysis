@@ -17,19 +17,21 @@ Phần này nối tiếp phần mini research ở buổi lý thuyết (slide 62�
 
 | Field | Hướng dẫn | Nhóm điền |
 | --- | --- | --- |
-| CÂU | R1 / R2 / R3 / R4 | |
-| SOURCE | Paper/blog, năm, URL, loại bằng chứng (benchmark, production report, blog kinh nghiệm) | |
-| CLAIM | Một kết luận gốc của nguồn. Không viết rộng hơn phạm vi paper | |
-| BOUNDARY | Model / dataset / setup giới hạn kết luận đó | |
-| HYPOTHESIS | Nếu đổi shape A→B (hoặc bật/tắt một thành phần), metric X sẽ đổi theo hướng nào, khoảng bao nhiêu | |
-| METHOD | Biến giữ cố định: model, tools, seed, corpus, giá, evaluator. Biến duy nhất được thay đổi: … | |
-| FAILURE / METRIC | Một lỗi dự kiến và cách đo nó: pass rate, pass^5, variance, cost/success, leak, bypass | |
+| CÂU | R1 / R2 / R3 / R4 | R4 — Evaluation confounders |
+| SOURCE | Paper/blog, năm, URL, loại bằng chứng | Tài liệu lab: docs/metrics.md và report/team/research_card.md trong repo nhóm, https://github.com/bato-bato/K5-L3A-DAY08-NhomNhomNhom-FromWorkflowsToAgents. Đây là tài liệu hướng dẫn thí nghiệm; nhóm không coi lần chạy này là tái lập paper gốc. |
+| CLAIM | Một kết luận gốc của nguồn | Theo quy định đo của lab, muốn so sánh công bằng cần giữ cố định corpus, seed, model, tool, pricing và evaluator. |
+| BOUNDARY | Model / dataset / setup giới hạn kết luận | LogiX-VN public: 14 claim, 5 seed, MockLLM và giá mô phỏng. Grader chấm quyết định, ledger và trace; không chấm chất lượng văn bản trả lời khách. |
+| HYPOTHESIS | Metric sẽ thay đổi thế nào | Bỏ lời gọi draft của single giữ nguyên pass rate và pass^5, đồng thời giảm cost/success. |
+| METHOD | Biến cố định / biến thay đổi | Giữ nguyên single agent, tools, evaluator, corpus, seed 11/22/33/44/55 và pricing. Chỉ bỏ model call có purpose=draft qua biến thể single_no_draft. |
+| FAILURE / METRIC | Lỗi dự kiến và cách đo | So pass rate, pass^5, seed variance và cost/success. Kiểm tra việc bỏ draft có làm thay đổi quyết định cuối hay không. |
 
 ## Kết quả ablation
 
-- Lệnh đã chạy (copy nguyên văn):
-- Run id / file report:
-- Kết quả so với hypothesis (đúng / sai / không kết luận được), kèm số liệu:
-- Giới hạn: MockLLM không phải model sản xuất, latency là `unavailable`.
+- Lệnh đã chạy:
+  python -m lab8.benchmark --shapes single,single_no_draft --extra-shape single_no_draft=bonus.single_no_draft:run_claim --cases data/public_claims.jsonl --seeds 11,22,33,44,55 --out reports/research_ablation.json
+- File report: src/reports/research_ablation.json
+- Kết quả: cả hai biến thể đạt pass rate 1.0, pass^5 1.0 và seed variance 0. Cost/success giảm từ khoảng 39.29 xuống 38.36 VND mô phỏng, tương đương khoảng 2.37%.
+- Kết luận: kết quả ủng hộ hypothesis trên bộ public. Bước draft làm tăng chi phí nhưng không đổi quyết định được grader chấm.
+- Giới hạn: MockLLM không phải model sản xuất; latency unavailable. Grader không đánh giá chất lượng trả lời khách, nên không kết luận bước draft vô ích trong sản phẩm thật. Thí nghiệm không chứng minh mọi chênh lệch giữa bốn shape đều do topology.
 
 Muốn đi xa hơn một ablation để lấy điểm cộng thì xem [docs/bonus_topics.md](../../docs/bonus_topics.md).
