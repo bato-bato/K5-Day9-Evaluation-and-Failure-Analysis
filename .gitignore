@@ -20,3 +20,7 @@ src/reports/bonus_hidden.json
 
 # Instructor-only hidden pack. Never push it to this repo.
 src/eval/instructor/
+
+# Local Day 9 reference checkout and generated integrity-attack fixtures.
+/day9/
+src/reports/traps/
