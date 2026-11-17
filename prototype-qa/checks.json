@@ -1,0 +1,66 @@
+[
+  {
+    "name": "initial fixed merges",
+    "passed": true
+  },
+  {
+    "name": "regression blocks",
+    "passed": true
+  },
+  {
+    "name": "gate modal contains pass_rate verdict",
+    "passed": true
+  },
+  {
+    "name": "slice regression blocks with v2",
+    "passed": true
+  },
+  {
+    "name": "honest refactor merges",
+    "passed": true
+  },
+  {
+    "name": "trace identifies first wrong step",
+    "passed": true
+  },
+  {
+    "name": "fixed trace has zero money and no override",
+    "passed": true
+  },
+  {
+    "name": "taxonomy search works",
+    "passed": true
+  },
+  {
+    "name": "judge calibration cards render",
+    "passed": true
+  },
+  {
+    "name": "demo tour reaches completion",
+    "passed": true
+  },
+  {
+    "name": "mobile overview has no horizontal overflow",
+    "passed": true
+  },
+  {
+    "name": "mobile menu opens",
+    "passed": true
+  },
+  {
+    "name": "mobile compare has no horizontal overflow",
+    "passed": true
+  },
+  {
+    "name": "mobile trace has no horizontal overflow",
+    "passed": true
+  },
+  {
+    "name": "mobile taxonomy has no horizontal overflow",
+    "passed": true
+  },
+  {
+    "name": "mobile judge has no horizontal overflow",
+    "passed": true
+  }
+]

@@ -24,3 +24,7 @@ src/eval/instructor/
 # Local Day 9 reference checkout and generated integrity-attack fixtures.
 /day9/
 src/reports/traps/
+
+# Separate Sites source checkout; the reviewable prototype is tracked below prototype/.
+/.sites-logix-source/
+/prototype-qa/*.png
